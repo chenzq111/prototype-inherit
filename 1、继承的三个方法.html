@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>构造函数的继承</title>
+</head>
+<body>
+  <script>
+    function foo(name,age){
+      console.log(this,`obj中的姓名:${this.name} =================================参数传递的姓名:${name}，年龄 ${age}`)
+    }
+    let obj = {
+      name: "八戒八戒心肠不坏"
+    }
+    //实现继承的三种方式
+    foo.call(obj,"悟空",19)
+    foo.apply(obj,["唐僧",61])
+    foo.bind(obj)("沙和尚",61) //bind返回一个函数 需要传入参数执行
+  </script>
+</body>
+</html>

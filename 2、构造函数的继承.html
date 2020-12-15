@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>继承：提高复用性</title>
+</head>
+<body>
+  <script>
+    //子类继承父类，但是不会继承父类原型中的内容
+    function Dad(name,age){
+      this.name = "八戒"
+      this.age = 18
+      this.money = 23
+    }
+    Dad.prototype.fn = function(){
+      console.log("父类原型中的方法，子类实例化后取不到")
+    }
+    function Son(name,age){
+      // Dad.call(this,name,age)
+      // Dad.apply(this,[name,age])
+      Dad.bind(this)(name,age)
+    }
+    let wuKong = new Son("悟空",16)
+    console.log(wuKong.money)
+    console.log(wuKong.fn())
+  </script>
+</body>
+</html>

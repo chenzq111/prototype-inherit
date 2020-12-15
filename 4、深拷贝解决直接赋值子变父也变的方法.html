@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //深拷贝=》序列化，但是func和undefined会丢失
+    let dadPrototype = {
+      name:"父类名称",
+      age:11,
+      fn:()=>{
+        console.log(111)
+      },
+      test:undefined
+    }
+    // let sonPrototype = JSON.parse(JSON.stringify(dadPrototype))
+    // sonPrototype.name = "子类名称"
+    // console.log("dadPrototype",dadPrototype)
+    // console.log("sonPrototype",sonPrototype)
+
+    //解决办法，自己写一个方法==》递归
+    function deepCopy(obj){
+      let newObj = Array.isArray(obj) ?[] : {}
+      for(let i in obj){
+        if(obj.hasOwnProperty(i)){
+          if(typeof obj[i] == "Object"){
+            newObj[i] = deepCopy(obj[i])
+          }else{
+            newObj[i] = obj[i]
+          }
+        }
+      }
+      return newObj
+    }
+    let sonPrototype = deepCopy(dadPrototype)
+    sonPrototype.name = "子类名称"
+    console.log("dadPrototype",dadPrototype)
+    console.log("sonPrototype",sonPrototype)
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     //子类继承父类，但是不会继承父类原型中的内容
+     function Dad(name,age){
+      this.name = "八戒"
+      this.age = 18
+      this.money = 23
+    }
+    Dad.prototype.fn = function(){
+      console.log("父类原型中的方法，子类实例化后取不到")
+    }
+    function Son(name,age){
+      // Dad.call(this,name,age)
+      // Dad.apply(this,[name,age])
+      Dad.bind(this)(name,age)
+    }
+
+
+
+    //一个地址 子边父也变
+    Son.prototype = Dad.prototype 
+    Son.prototype.fn = function(){
+      console.log("子类修改方法时会覆盖父类")
+    }
+    let wuKong = new Son("悟空",16)
+    let wuKong1 = new Dad("悟空1",16)
+
+    console.log(wuKong.fn(),wuKong1.fn())
+
+
+
+
+
+
+  </script>
+</body>
+</html>

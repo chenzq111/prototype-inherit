@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     //组合继承 
+     function Dad(name,age){
+      this.name = "八戒"
+      this.age = 18
+      this.money = 23
+    }
+    Dad.prototype.fn = function(){
+      console.log("父类原型中的方法")
+    }
+    function Son(name,age){
+      Dad.bind(this)(name,age)
+    }
+
+    //创建中间类
+    function Link(){}
+    Link.prototype = Dad.prototype 
+    Son.prototype = new Link()
+    Son.prototype.constructor = Son
+
+
+
+    Son.prototype.fn = function(){
+      console.log("子类的原型是实例化中间类")
+    }
+    let wuKong = new Son("悟空",16)
+    let wuKong1 = new Dad("悟空1",16)
+    wuKong.fn()
+    wuKong1.fn()
+
+  </script>
+</body>
+</html>
